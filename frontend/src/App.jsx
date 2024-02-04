@@ -1,4 +1,5 @@
 import { useState,useEffect } from 'react'
+import NewNote from './NewNote.jsx'
 import axios from 'axios';
 import './App.css'
 
@@ -16,13 +17,12 @@ function App() {
     }
   },[])
 
-    console.log(data);
   return (
     <>
-      <div className='w-screen h-screen grid justify-center content-center'>
-        <div className=" bg-white shadow rounded">
-          <h1 className="font-sans text-slate-700">Hello from react and vite and tailwindcss</h1>
-          <p className="font-sans text-slate-700">{data.test}</p>
+      <div className='w-screen h-screen grid justify-center bg-gray-300'>
+        <NewNote/>
+        <div className=" bg-gray-400 rounded-sm p-2 grid">
+          <h2 className="font-sans text-slate-700">The Auther</h2>
         </div>
       </div>
     </>
