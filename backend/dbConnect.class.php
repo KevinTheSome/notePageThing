@@ -2,19 +2,26 @@
 
 class DbConnect{
 
-    private $username = "";
+    private $username = "macono";
     private $password = "";
-    private $dbName = "";
-    private $port = "";
+    private $dbName = "noteborde";
+    private $port = "5432";
+    private $dbPDO;
 
-    function connect(){
+    public function connect(){
 
-        $conn = new PDO("mysql:host=localhost;dbname=$this->dbName;port=$this->port", $this->username, $this->password);
+        $this->dbPDO = new PDO('pgsql:host=localhost;dbname=noteborde', $this->username, $this->password);
+        $this->dbPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //to see errors
 
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        
+    }
+
+    public function runSQL(string $sql){
+        $this->dbPDO->exec($sql);
+    }
+
+    function __destruct()
+    {
+        $this->dbPDO = null;
     }
 
 }

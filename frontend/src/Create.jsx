@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import NewNoteButton from "./NewNoteButton.jsx";
 
@@ -7,18 +7,21 @@ function Create() {
   const [auther, setAuther] = useState("");
   const [note, setNote] = useState("");
   const [boolComp, setBoolComp] = useState(false);
+  const navigate = useNavigate();
 
-  function sendData() {
+  async function sendData() {
     try {
       axios.post("http://localhost:8888/", {
         auther: auther, note: note, boolComp: boolComp
-      });
-      setAuther("");
-      setNote("");
-      setBoolComp(false);
-      throw redirect("/");
+      })
+      .then(function (response) {
+        if (response.status === 200) {
+          return navigate("/");
+        }
+        return null;
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
