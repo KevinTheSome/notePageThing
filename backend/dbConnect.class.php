@@ -6,7 +6,8 @@ class DbConnect{
     private $password = "";
     private $dbName = "noteborde";
     private $port = "5432";
-    private $dbPDO;
+    private $host = "localhost";
+    private $dbconn;
 
     private function fixBool(bool $bool)
     {
@@ -19,30 +20,26 @@ class DbConnect{
 
     public function connect()
     {
-        $this->dbPDO = new PDO('pgsql:host=localhost;dbname=noteborde', $this->username, $this->password);
-        $this->dbPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //to see errors
+        $this->dbconn = pg_connect("host= $this->host port= $this->port dbname= $this->dbName user= $this->username password= $this->password ");
     }
 
-    public function runSQL(string $sql)
+    public function addNote(object $note)
     {
-        $this->dbPDO->exec($sql);
+        $row = ['auther' => $note->auther, 'uid' => $note->uid,'note' => $note->note,'compleated' => $this->fixbool($note->compleated)];
+        $res = pg_insert($this->dbconn, 'notes', $row, PGSQL_DML_ESCAPE);
+        if(!$res) {
+            echo "ERROR: data not set!\n";
+        }
     }
 
-    public function saveNote(object $note)
+    public function seeStuff(string $sqlQuery)
     {
-        //$this->dbPDO->exec('INSERT INTO notes (auther, uid, note, compleated) VALUES (\'' .$note->auther .'\',\'' .$note->uid .'\',\'' .$note->note.'\','.$this->fixBool($note->compleated) .');');
-        echo('INSERT INTO notes (auther, uid, note, compleated) VALUES (\'' .$note->auther .'\',\'' .$note->uid .'\',\'' .$note->note.'\','.$this->fixBool($note->compleated) .');');
-    }
-
-    public function seeStuff()
-    {
-        $stmt = $this->dbPDO->query('SELECT * FROM notes');
-        return $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        return pg_query($this->dbconn, $sqlQuery);
     }
 
     function __destruct()
     {
-        $this->dbPDO = null;
+        pg_close($this->dbconn);
     }
 
 }
