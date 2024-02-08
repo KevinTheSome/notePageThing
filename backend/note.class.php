@@ -2,7 +2,7 @@
 
 class Note{
 
-    public static string $auther;
+    public string $auther;
     public string $note;
     public bool $compleated;
     public $uid;
