@@ -8,8 +8,7 @@ include "dbConnect.class.php";
 $testNote = new Note("AutherOfTheNote","the note whats need to be saved",false);
 $db = new DbConnect;
 $db->connect();
-//$db->saveNote($testNote);
-var_dump($db->seeStuff("SELECT * FROM notes"));
+$db->delNote("65c50a9969b1c");
 //$db->runSQL("CREATE TABLE notes (auther TEXT NOT NULL, UID TEXT NOT NULL, note TEXT NOT NULL, compleated BOOLEAN NOT NULL)");
 //do not use unless you dont have a tabel in the data base
 

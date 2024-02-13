@@ -20,26 +20,39 @@ class DbConnect{
 
     public function connect()
     {
-        $this->dbconn = pg_connect("host= $this->host port= $this->port dbname= $this->dbName user= $this->username password= $this->password ");
+        $this->dbconn = new PDO ('pgsql:host='.$this->host .';port='.$this->port .';dbname='.$this->dbName .';user=' .$this->username .';password=' .$this->password .'');
+        $this->dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    private function runSQL($sql){
+        $this->dbconn->exec($sql);
     }
 
     public function addNote(object $note)
     {
-        $row = ['auther' => $note->auther, 'uid' => $note->uid,'note' => $note->note,'compleated' => $this->fixbool($note->compleated)];
-        $res = pg_insert($this->dbconn, 'notes', $row, PGSQL_DML_ESCAPE);
-        if(!$res) {
-            echo "ERROR: data not set!\n";
+        if ($this->dbconn != null){
+            $input = "'" .$note->auther ."','" .$note->uid ."','" .$note->note ."'," .$this->fixBool($note->compleated) ."";
+            $this->runSQL('INSERT INTO notes (auther,uid,note,compleated) VALUES (' .$input .');');
+        }else{
+            echo "ERROR: Connactione = null";
         }
     }
 
-    public function seeStuff(string $sqlQuery)
+    public function delNote(string $uid)
     {
-        return pg_query($this->dbconn, $sqlQuery);
+        $temp = "'$uid'";
+        $this->runSQL('DELETE FROM notes WHERE uid=' .$temp .';');
+    }
+
+    public function updateNote(string $uid)
+    {
+        $tempUid = "'$uid'";
+        $this->runSQL('UPDATE notes SET compleated ='   .'  uid=' .$tempUid .';');
     }
 
     function __destruct()
     {
-        pg_close($this->dbconn);
+        $dbconn = null;
     }
 
 }
