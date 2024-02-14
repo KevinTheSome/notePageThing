@@ -12,7 +12,7 @@ class DbConnect{
     private $host = "localhost";
     private $dbconn;
 
-    private function fixBool(bool $bool)  //php bools are stupid
+    private function fixBool(bool $bool)  //php bools are stupid and now its a string
     {
         if ($bool == true){
             return "TRUE";
