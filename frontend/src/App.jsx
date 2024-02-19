@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import NewNoteButton from './NewNoteButton.jsx';
 import axios from 'axios';
+import Note from './Note.jsx';
 import './App.css';
 
 function App() {
@@ -10,12 +11,18 @@ function App() {
     try {
       axios.get("http://localhost:8888/")
       .then(function (response){
-        setData(response.data);
-      })
+        setData(response.data["notes"]);
+      })  
     } catch (error) {
       console.error(error)
     }
   },[])
+
+  console.log(data)
+
+  const jsxMapNotes = data.map((value , key) => {
+    return <Note key={key} auther={value["auther"]} note={value["note"]} compleated={value["compleated"]}/>
+  })
 
   return (
     <>
@@ -24,6 +31,7 @@ function App() {
         <div className=" bg-gray-400 rounded-sm p-2 grid">
           <h2 className="font-sans text-slate-700">The Auther</h2>
         </div>
+        {jsxMapNotes}
       </div>
     </>
   )
