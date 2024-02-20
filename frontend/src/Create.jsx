@@ -11,7 +11,7 @@ function Create() {
 
   async function sendData() {
     try {
-      axios.post("http://localhost:8888/", {
+      axios.post("http://localhost:8888/Routes/create.php", {
         auther: auther, note: note, boolComp: boolComp
       })
       .then(function (response) {

@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:8888/")
+      axios.get("http://localhost:8888/Routes/read.php")
       .then(function (response){
         setData(response.data["notes"]);
       })  

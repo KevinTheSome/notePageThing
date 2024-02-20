@@ -11,6 +11,7 @@ include "../NoteController.class.php";
 $db = new DbConnect;
 $noteController = new NoteController($db);
 $db->connect();
+echo json_encode(["notes" => $noteController->raedNotes()]);
 
 
 
