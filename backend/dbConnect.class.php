@@ -12,14 +12,14 @@ class DbConnect{
     private $host = "localhost";
     public $dbconn;
 
-        public function fixBool(bool $bool)  //php bools are stupid and now its a string
-        {
-            if ($bool == true){
-                return "TRUE";
-            }else{
-                return "FALSE";
-            }
+    public function fixBool(bool $bool)  //php bools are stupid and now its a string
+    {
+        if ($bool == true){
+            return "TRUE";
+        }else{
+            return "FALSE";
         }
+    }
 
     public function connect() //connects to the db defualt postgresSQL
     {

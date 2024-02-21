@@ -16,8 +16,7 @@ function Create() {
       })
       .then(function (response) {
         if (response.status === 200) {
-          //return navigate("/");
-          return console.log(response);
+          return navigate("/");
         }
         return null;
       })

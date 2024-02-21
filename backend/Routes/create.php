@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $data = json_decode(file_get_contents("php://input"), true);
     $tmp = new Note($data["auther"],$data["note"],$data["boolComp"]);
-    var_dump($tmp);
     $noteController->addNote($tmp);
 }
 
