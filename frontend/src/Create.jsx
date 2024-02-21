@@ -12,11 +12,12 @@ function Create() {
   async function sendData() {
     try {
       axios.post("http://localhost:8888/Routes/create.php", {
-        auther: auther, note: note, boolComp: boolComp
+        auther: auther, note: note, boolComp: boolComp,
       })
       .then(function (response) {
         if (response.status === 200) {
-          return navigate("/");
+          //return navigate("/");
+          return console.log(response);
         }
         return null;
       })

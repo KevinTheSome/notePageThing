@@ -13,7 +13,7 @@ class NoteController{
     {
         if ($this->dbconnect->dbconn != null){
             $input = "'" .$note->auther ."','" .$note->uid ."','" .$note->note ."'," . $this->dbconnect->fixBool($note->compleated) ."";
-            $$this->dbconnect->runSQL('INSERT INTO notes (auther,uid,note,compleated) VALUES (' .$input .');');
+            $this->dbconnect->runSQL('INSERT INTO notes (auther,uid,note,compleated) VALUES (' .$input .');');
         }else{
             echo "ERROR: Connactione = null";
         }

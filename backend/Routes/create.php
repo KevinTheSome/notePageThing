@@ -11,9 +11,13 @@ include "../NoteController.class.php";
 $db = new DbConnect;
 $noteController = new NoteController($db);
 $db->connect();
-$data = json_decode(file_get_contents("php://input"), true);
-var_dump($data);
-//$noteController->addNote();
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $data = json_decode(file_get_contents("php://input"), true);
+    $tmp = new Note($data["auther"],$data["note"],$data["boolComp"]);
+    var_dump($tmp);
+    $noteController->addNote($tmp);
+}
 
 
 
