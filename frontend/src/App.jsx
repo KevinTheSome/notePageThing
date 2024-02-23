@@ -21,7 +21,7 @@ function App() {
   console.log(data)
 
   const jsxMapNotes = data.map((value , key) => {
-    return <Note key={key} auther={value["auther"]} note={value["note"]} compleated={value["compleated"]}/>
+    return <Note key={key} uid={value["uid"]} auther={value["auther"]} note={value["note"]} compleated={value["compleated"]}/>
   })
 
   return (
