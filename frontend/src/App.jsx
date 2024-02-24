@@ -26,11 +26,8 @@ function App() {
 
   return (
     <>
-      <div className='w-screen h-screen grid justify-center bg-gray-300'>
+      <div className='w-screen h-screen grid justify-center'>
         <NewNoteButton/>
-        <div className=" bg-gray-400 rounded-sm p-2 grid">
-          <h2 className="font-sans text-slate-700">The Auther</h2>
-        </div>
         {jsxMapNotes}
       </div>
     </>
