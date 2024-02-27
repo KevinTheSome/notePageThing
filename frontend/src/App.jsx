@@ -28,7 +28,9 @@ function App() {
     <>
       <div className='w-screen h-screen grid justify-center'>
         <NewNoteButton/>
-        {jsxMapNotes}
+        <div className='justify-center'>
+          {jsxMapNotes}
+        </div>
       </div>
     </>
   )
