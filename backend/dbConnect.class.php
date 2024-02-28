@@ -23,7 +23,7 @@ class DbConnect{
 
     public function connect() //connects to the db defualt postgresSQL
     {
-        $this->dbconn = new PDO ('pgsql:host='.$this->host .';port='.$this->port .';dbname='.$this->dbName .';user=' .$this->username .';password=' .$this->password .'');
+        $this->dbconn = new PDO ('pgsql:host='.$this->host .';port='.$this->port .';dbname='.$this->dbName .';user=' .$this->username .';password=' .$this->password .';charset=UTF8');
         $this->dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
         
