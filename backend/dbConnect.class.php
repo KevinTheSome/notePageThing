@@ -34,7 +34,7 @@ class DbConnect{
 
     function __destruct() //terminate the connactione to the db if not used anymore
     {
-        $dbconn = null;
+        $this->dbconn = null;
     }
 
 }
